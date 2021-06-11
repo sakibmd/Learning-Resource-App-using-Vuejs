@@ -1,34 +1,16 @@
 <template>
   <div>
     <the-header title="Remember Me"></the-header>
-    <stored-resources :resources="storedResources"></stored-resources>
+    <the-resources></the-resources>
   </div>
 </template>
 <script>
-import StoredResources from './components/learning-resource/StoredResources.vue';
 import TheHeader from './components/layouts/TheHeader.vue';
+import TheResources from './components/learning-resource/TheResources.vue';
 export default {
   components: {
-    StoredResources,
-    TheHeader
-  },
-  data() {
-    return {
-      storedResources: [
-        {
-          id: 'google',
-          title: 'Google',
-          description: 'You have to know how to use Google...',
-          link: 'https://google.com'
-        },
-        {
-          id: 'youtube',
-          title: 'YouTube',
-          description: 'Learn lots of things from YouTube',
-          link: 'https://youtube.com'
-        }
-      ]
-    };
+    TheHeader,
+    TheResources
   }
 };
 </script>
@@ -47,5 +29,4 @@ html {
 body {
   margin: 0;
 }
-
 </style>
