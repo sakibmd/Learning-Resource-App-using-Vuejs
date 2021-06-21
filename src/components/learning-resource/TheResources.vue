@@ -1,4 +1,13 @@
 <template>
+  <base-dialog v-if="isInvalidInput" title="Remove Alert" @close="cancleRemove">
+    <template #default>
+      <p>Are you sure to delete this resource ?</p>
+    </template>
+    <template #actions>
+      <base-button @click="confirmError">Yes, Confirm!</base-button>
+      <base-button @click="cancleRemove">No</base-button>
+    </template>
+  </base-dialog>
   <base-card>
     <base-button
       @click="setSelectedTab('stored-resources')"
@@ -13,7 +22,7 @@
   </base-card>
 
   <keep-alive>
-    <component :is="selectedTab"></component> 
+    <component :is="selectedTab"></component>
   </keep-alive>
 </template>
 
@@ -27,6 +36,8 @@ export default {
   },
   data() {
     return {
+      isInvalidInput: false,
+      deletedId: null,
       selectedTab: 'stored-resources',
       storedResources: [
         {
@@ -73,9 +84,22 @@ export default {
       this.storedResources.unshift(newResource);
       this.selectedTab = 'stored-resources';
     },
-    removeResource(resId){
-      const removeIndex = this.storedResources.findIndex(res => res.id === resId);
+    removeResource(resId) {
+      this.isInvalidInput = true;
+      this.deletedId = resId;
+      return;
+    },
+    confirmError() {
+      this.isInvalidInput = false;
+      const removeIndex = this.storedResources.findIndex(
+        res => res.id === this.deletedId
+      );
       this.storedResources.splice(removeIndex, 1);
+      this.deletedId = null;
+    },
+    cancleRemove() {
+      this.isInvalidInput = false;
+      this.deletedId = null;
     }
   }
 };

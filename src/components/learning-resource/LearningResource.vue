@@ -3,12 +3,14 @@
     <base-card>
       <header>
         <h3>{{ title }}</h3>
-        <base-button mode="flat" @click="removeResource(id)">Delete</base-button>
+        <base-button mode="flat" @click="removeResource(id)"
+          >Delete</base-button
+        >
       </header>
-    <p>{{ description }}</p>
-    <nav>
-      <a :href="link">View Resouce</a>
-    </nav>
+      <p>{{ description }}</p>
+      <nav>
+        <a :href="link" target="_blank">View Resouce</a>
+      </nav>
     </base-card>
   </li>
 </template>
@@ -23,7 +25,7 @@ export default {
 <style scoped>
 li {
   margin: auto;
-  max-width: 40rem;
+  /* max-width: 40rem; */
 }
 
 header {
